@@ -1,0 +1,4 @@
+<div *ngFor="let row of blocks">
+  <app-block *ngFor="let block of row" [block]="block">{{ block }}</app-block>
+</div>
+

@@ -1,0 +1,10 @@
+.block {
+  height: 20px;
+  width: 20px;
+  border: 1px solid;
+  display: inline-block;
+  font-size: 20px;
+  padding: 20px;
+  font-weight: bold;
+  text-align: center;
+}
