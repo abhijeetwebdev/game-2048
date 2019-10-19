@@ -97,12 +97,18 @@ export class AppComponent implements OnInit {
       for (let col = 0; col < this.blocks[row].length; col++) {
         const block = this.blocks[row][col];
         // console.log(row, col, block);
-        if (direction === 'left' && this.blocks[row][col - 1] === 0 && this.blocks[row][col] !== 0) {
+        if (direction === 'left'
+          && this.blocks[row][col - 1] === 0
+          && this.blocks[row][col] !== 0
+        ) {
           const val = this.blocks[row][col];
           this.blocks[row][col - 1] = val;
           this.blocks[row][col] = 0;
         }
-        if (direction === 'right' && this.blocks[row][col + 1] === 0 && this.blocks[row][col] !== 0) {
+        if (direction === 'right'
+          && this.blocks[row][col + 1] === 0
+          && this.blocks[row][col] !== 0
+        ) {
           const val = this.blocks[row][col];
           this.blocks[row][col + 1] = val;
           this.blocks[row][col] = 0;
@@ -126,51 +132,7 @@ export class AppComponent implements OnInit {
           this.blocks[row][col] = 0;
         }
       }
-      console.log('---');
-      // this.blockScanTillNonEmpty(direction, this.blocks[i]);
-      // break;
     }
-  }
-
-  // blockScanTillNonEmpty(direction: string, row: any[]) {
-  //   if (direction === 'left') {
-  //     for (let i = 0; i < row.length ; i++) {
-  //       const block = row[i];
-  //       if (block !== 0) {
-  //         console.log(i, ': NOT EMPTY', block);
-  //       } else {
-  //         console.log(i, ': EMPTY', block);
-  //       }
-  //     }
-  //   } else if (direction === 'right') {
-  //     for (let i = 0; i < row.length ; i++) {
-  //       const block = row[i];
-  //       if (block !== 0) {
-  //         console.log(i, ': NOT EMPTY', block);
-  //       } else {
-  //         console.log(i, ': EMPTY', block);
-  //       }
-  //     }
-  //   }
-  // }
-
-  /**
-   * returns value from the block
-   * @param row row index
-   * @param col col index
-   */
-  blockGetValue(row, col) {
-    return this.blocks[row][col];
-  }
-
-  /**
-   * returns value from the block
-   * @param row row index
-   * @param col col index
-   */
-  blockSetValue(row, col, value) {
-    this.blocks[row][col] = value;
-    return value;
   }
 
 }
