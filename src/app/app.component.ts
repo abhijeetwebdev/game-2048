@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   // random numbers to chose from
   randomNums = [2, 4];
   // number of blocks to start with
-  numInitialBlocks = 4;
+  numInitialBlocks = 8;
 
   constructor() {}
 
@@ -26,14 +26,16 @@ export class AppComponent implements OnInit {
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     // console.log('event: ', event);
-    if (event.key === '1') {
-      this.float('left');
-    } else if (event.key === '2') {
-      this.float('right');
-    } else if (event.key === '3') {
-      this.float('up');
-    } else if (event.key === '4') {
-      this.float('down');
+    for (let i = 0; i < this.boardSize; i++) {
+      if (event.key === '1') {
+        this.float('left');
+      } else if (event.key === '2') {
+        this.float('right');
+      } else if (event.key === '3') {
+        this.float('up');
+      } else if (event.key === '4') {
+        this.float('down');
+      }
     }
   }
 
@@ -68,7 +70,7 @@ export class AppComponent implements OnInit {
   initialBlocks() {
     for (let i = 0; i < this.numInitialBlocks; i++) {
       const block = this.blockSelectRandom();
-      this.blockFillRandomNum(block[0], block[1]);
+      this.blockFill(block[0], block[1]);
     }
   }
 
@@ -82,7 +84,7 @@ export class AppComponent implements OnInit {
   /**
    * fills the block with either 2 or 4 number randomly
    */
-  blockFillRandomNum(row, col) {
+  blockFill(row, col) {
     this.blocks[row][col] = this.randomNums[Math.floor(Math.random() * this.randomNums.length)];
   }
 
@@ -91,7 +93,66 @@ export class AppComponent implements OnInit {
    * @param direction string
    */
   float(direction: string) {
-    console.log('direction: ', direction);
+    for (let row = 0; row < this.blocks.length; row++) {
+      for (let col = 0; col < this.blocks[row].length; col++) {
+        const block = this.blocks[row][col];
+        // console.log(row, col, block);
+        if (direction === 'left' && this.blocks[row][col - 1] === 0 && this.blocks[row][col] !== 0) {
+          const val = this.blocks[row][col];
+          this.blocks[row][col - 1] = val;
+          this.blocks[row][col] = 0;
+        }
+        if (direction === 'right' && this.blocks[row][col + 1] === 0 && this.blocks[row][col] !== 0) {
+          const val = this.blocks[row][col];
+          this.blocks[row][col + 1] = val;
+          this.blocks[row][col] = 0;
+        }
+      }
+      console.log('---');
+      // this.blockScanTillNonEmpty(direction, this.blocks[i]);
+      // break;
+    }
+  }
+
+  // blockScanTillNonEmpty(direction: string, row: any[]) {
+  //   if (direction === 'left') {
+  //     for (let i = 0; i < row.length ; i++) {
+  //       const block = row[i];
+  //       if (block !== 0) {
+  //         console.log(i, ': NOT EMPTY', block);
+  //       } else {
+  //         console.log(i, ': EMPTY', block);
+  //       }
+  //     }
+  //   } else if (direction === 'right') {
+  //     for (let i = 0; i < row.length ; i++) {
+  //       const block = row[i];
+  //       if (block !== 0) {
+  //         console.log(i, ': NOT EMPTY', block);
+  //       } else {
+  //         console.log(i, ': EMPTY', block);
+  //       }
+  //     }
+  //   }
+  // }
+
+  /**
+   * returns value from the block
+   * @param row row index
+   * @param col col index
+   */
+  blockGetValue(row, col) {
+    return this.blocks[row][col];
+  }
+
+  /**
+   * returns value from the block
+   * @param row row index
+   * @param col col index
+   */
+  blockSetValue(row, col, value) {
+    this.blocks[row][col] = value;
+    return value;
   }
 
 }
