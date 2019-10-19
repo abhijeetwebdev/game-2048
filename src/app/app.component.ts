@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   // random numbers to chose from
   randomNums = [2, 4];
   // number of blocks to start with
-  numInitialBlocks = 8;
+  numInitialBlocks = 4;
 
   constructor() {}
 
@@ -23,19 +23,10 @@ export class AppComponent implements OnInit {
    * to listen the navigation keys
    * @param event keypress
    */
-  @HostListener('document:keypress', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    // console.log('event: ', event);
     for (let i = 0; i < this.boardSize; i++) {
-      if (event.key === '1') {
-        this.float('left');
-      } else if (event.key === '2') {
-        this.float('right');
-      } else if (event.key === '3') {
-        this.float('up');
-      } else if (event.key === '4') {
-        this.float('down');
-      }
+      this.float(event.key);
     }
   }
 
@@ -95,9 +86,8 @@ export class AppComponent implements OnInit {
   float(direction: string) {
     for (let row = 0; row < this.blocks.length; row++) {
       for (let col = 0; col < this.blocks[row].length; col++) {
-        const block = this.blocks[row][col];
         // console.log(row, col, block);
-        if (direction === 'left') {
+        if (direction === 'ArrowLeft') {
           if (this.blocks[row][col - 1] === 0
             && this.blocks[row][col] !== 0
           ) {
@@ -111,7 +101,7 @@ export class AppComponent implements OnInit {
             this.blocks[row][col] = 0;
           }
         }
-        if (direction === 'right') {
+        if (direction === 'ArrowRight') {
           if (this.blocks[row][col + 1] === 0
             && this.blocks[row][col] !== 0
           ) {
@@ -125,7 +115,7 @@ export class AppComponent implements OnInit {
             this.blocks[row][col] = 0;
           }
         }
-        if (direction === 'up'
+        if (direction === 'ArrowUp'
           && row !== 0 // to prevent going below existing rows
         ) {
           if (this.blocks[row - 1][col] === 0
@@ -141,7 +131,7 @@ export class AppComponent implements OnInit {
             this.blocks[row][col] = 0;
           }
         }
-        if (direction === 'down'
+        if (direction === 'ArrowDown'
           && row !== (this.boardSize - 1) // to prevent going above existing rows
         ) {
           if (this.blocks[row + 1][col] === 0
