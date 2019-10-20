@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // for DEV purpose, start the game on DOM load
-    this.boardCreate();
+    // this.boardCreate();
   }
 
   boardCreate() {
