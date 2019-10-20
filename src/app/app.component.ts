@@ -25,13 +25,21 @@ export class AppComponent implements OnInit {
    */
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    for (let i = 0; i < this.boardSize; i++) {
-      this.float(event.key);
+    // console.log('event ', event);
+    if (this.boardCreated // float trigger only if board is created
+      && (event.key === 'ArrowLeft'
+        || event.key === 'ArrowRight'
+        || event.key === 'ArrowUp'
+        || event.key === 'ArrowDown'
+      )
+    ) {
+      for (let i = 0; i < this.boardSize; i++) {
+        this.float(event.key);
+      }
+      // fill 1 empty box
+      const block = this.blockSelectRandom();
+      this.blockFill(block[0], block[1]);
     }
-
-    // fill 1 empty box
-    const block = this.blockSelectRandom();
-    this.blockFill(block[0], block[1]);
   }
 
   ngOnInit() {
