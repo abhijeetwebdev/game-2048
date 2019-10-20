@@ -1,4 +1,7 @@
-<input type="text" [(ngModel)]="boardSize">
-<button (click)="boardCreate()">Create</button>
-
-<app-board *ngIf="boardCreated" [blocks]="blocks"></app-board>
+<div class="wrapper">
+  <h2>Please select the board size: 4 for (4x4)</h2>
+  <input type="text" [(ngModel)]="boardSize">
+  <button (click)="boardCreate()">Create</button>
+  <hr>
+  <app-board *ngIf="boardCreated" [blocks]="blocks"></app-board>
+</div>
