@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   blocks: any[];
   // random numbers to chose from
   randomNums = [2, 4];
+  // number of blocks to start with
+  numInitialBlocks = 4;
 
   constructor() {}
 
@@ -64,11 +66,10 @@ export class AppComponent implements OnInit {
    * filling 2 random blocks to get started
    */
   initialBlocks() {
-    const block1 = this.blockSelectRandom();
-    this.blockFillRandomNum(block1[0], block1[1]);
-
-    const block2 = this.blockSelectRandom();
-    this.blockFillRandomNum(block2[0], block2[1]);
+    for (let i = 0; i < this.numInitialBlocks; i++) {
+      const block = this.blockSelectRandom();
+      this.blockFillRandomNum(block[0], block[1]);
+    }
   }
 
   /**
