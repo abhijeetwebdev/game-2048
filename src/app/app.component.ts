@@ -107,6 +107,24 @@ export class AppComponent implements OnInit {
           this.blocks[row][col + 1] = val;
           this.blocks[row][col] = 0;
         }
+        if (direction === 'up'
+          && row !== 0 // to prevent going below existing rows
+          && this.blocks[row - 1][col] === 0
+          && this.blocks[row][col] !== 0
+        ) {
+          const val = this.blocks[row][col];
+          this.blocks[row - 1][col] = val;
+          this.blocks[row][col] = 0;
+        }
+        if (direction === 'down'
+          && row !== (this.boardSize - 1) // to prevent going above existing rows
+          && this.blocks[row + 1][col] === 0
+          && this.blocks[row][col] !== 0
+        ) {
+          const val = this.blocks[row][col];
+          this.blocks[row + 1][col] = val;
+          this.blocks[row][col] = 0;
+        }
       }
       console.log('---');
       // this.blockScanTillNonEmpty(direction, this.blocks[i]);
