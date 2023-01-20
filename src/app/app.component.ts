@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < this.boardSize; i++) {
       this.float(event.key);
     }
+
+    // fill 1 empty box
+    const block = this.blockSelectRandom();
+    this.blockFill(block[0], block[1]);
   }
 
   ngOnInit() {
@@ -69,7 +73,12 @@ export class AppComponent implements OnInit {
    * returns array [row, col] of block location
    */
   blockSelectRandom() {
-    return [Math.floor(Math.random() * ((this.boardSize - 1) - 0 + 1)) + 0, Math.floor(Math.random() * ((this.boardSize - 1) - 0 + 1)) + 0];
+    const row = Math.floor(Math.random() * ((this.boardSize - 1) - 0 + 1)) + 0;
+    const col = Math.floor(Math.random() * ((this.boardSize - 1) - 0 + 1)) + 0;
+    if (this.isEmpty(row, col)) {
+      return this.blockSelectRandom();
+    }
+    return [row, col];
   }
 
   /**
@@ -149,6 +158,15 @@ export class AppComponent implements OnInit {
         }
       }
     }
+  }
+
+  /**
+   * returns number | bool
+   * @param row number
+   * @param col number
+   */
+  isEmpty(row, col) {
+    return this.blocks[row][col];
   }
 
 }
