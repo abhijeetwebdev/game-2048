@@ -1,11 +1,13 @@
 .block {
   height: 50px;
-  width: 100px; /* UI is breacking if numbers going above 3 digits */
+  width: 50px;
   border: 1px solid;
   display: inline-block;
-  font-size: 50px;
-  padding: 25px;
+  font-size: 30px;
+  padding: 10px;
   text-align: center;
+  vertical-align: middle;
+  display: table-cell;
 }
 
 .grey-bg {
