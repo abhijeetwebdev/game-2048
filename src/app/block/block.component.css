@@ -1,6 +1,6 @@
 .block {
   height: 50px;
-  width: 50px;
+  width: 100px; /* UI is breacking if numbers going above 3 digits */
   border: 1px solid;
   display: inline-block;
   font-size: 50px;
