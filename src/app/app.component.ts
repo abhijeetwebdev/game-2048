@@ -97,39 +97,65 @@ export class AppComponent implements OnInit {
       for (let col = 0; col < this.blocks[row].length; col++) {
         const block = this.blocks[row][col];
         // console.log(row, col, block);
-        if (direction === 'left'
-          && this.blocks[row][col - 1] === 0
-          && this.blocks[row][col] !== 0
-        ) {
-          const val = this.blocks[row][col];
-          this.blocks[row][col - 1] = val;
-          this.blocks[row][col] = 0;
+        if (direction === 'left') {
+          if (this.blocks[row][col - 1] === 0
+            && this.blocks[row][col] !== 0
+          ) {
+            const val = this.blocks[row][col];
+            this.blocks[row][col - 1] = val;
+            this.blocks[row][col] = 0;
+          }
+          if (this.blocks[row][col - 1] === this.blocks[row][col]) {
+            const val = this.blocks[row][col] * 2;
+            this.blocks[row][col - 1] = val;
+            this.blocks[row][col] = 0;
+          }
         }
-        if (direction === 'right'
-          && this.blocks[row][col + 1] === 0
-          && this.blocks[row][col] !== 0
-        ) {
-          const val = this.blocks[row][col];
-          this.blocks[row][col + 1] = val;
-          this.blocks[row][col] = 0;
+        if (direction === 'right') {
+          if (this.blocks[row][col + 1] === 0
+            && this.blocks[row][col] !== 0
+          ) {
+            const val = this.blocks[row][col];
+            this.blocks[row][col + 1] = val;
+            this.blocks[row][col] = 0;
+          }
+          if (this.blocks[row][col + 1] === this.blocks[row][col]) {
+            const val = this.blocks[row][col] * 2;
+            this.blocks[row][col + 1] = val;
+            this.blocks[row][col] = 0;
+          }
         }
         if (direction === 'up'
           && row !== 0 // to prevent going below existing rows
-          && this.blocks[row - 1][col] === 0
-          && this.blocks[row][col] !== 0
         ) {
-          const val = this.blocks[row][col];
-          this.blocks[row - 1][col] = val;
-          this.blocks[row][col] = 0;
+          if (this.blocks[row - 1][col] === 0
+            && this.blocks[row][col] !== 0
+          ) {
+            const val = this.blocks[row][col];
+            this.blocks[row - 1][col] = val;
+            this.blocks[row][col] = 0;
+          }
+          if (this.blocks[row - 1][col] === this.blocks[row][col]) {
+            const val = this.blocks[row][col] * 2;
+            this.blocks[row - 1][col] = val;
+            this.blocks[row][col] = 0;
+          }
         }
         if (direction === 'down'
           && row !== (this.boardSize - 1) // to prevent going above existing rows
-          && this.blocks[row + 1][col] === 0
-          && this.blocks[row][col] !== 0
         ) {
-          const val = this.blocks[row][col];
-          this.blocks[row + 1][col] = val;
-          this.blocks[row][col] = 0;
+          if (this.blocks[row + 1][col] === 0
+            && this.blocks[row][col] !== 0
+          ) {
+            const val = this.blocks[row][col];
+            this.blocks[row + 1][col] = val;
+            this.blocks[row][col] = 0;
+          }
+          if (this.blocks[row + 1][col] === this.blocks[row][col]) {
+            const val = this.blocks[row][col] * 2;
+            this.blocks[row + 1][col] = val;
+            this.blocks[row][col] = 0;
+          }
         }
       }
     }
