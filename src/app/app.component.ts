@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   // random numbers to chose from
   randomNums = [2, 4];
   // number of blocks to start with
-  numInitialBlocks = 4;
+  numInitialBlocks = 2;
 
   constructor() {}
 
